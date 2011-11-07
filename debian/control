@@ -1,0 +1,33 @@
+Source: sstable
+Maintainer: Anton Kortunov <toshik@yandex-team.ru>
+Section: python
+Priority: optional
+Build-Depends: python-setuptools (>= 0.6b3), debhelper (>= 7), python-support (>= 0.8.4)
+Standards-Version: 3.7.2
+
+Package: python-sstable
+Architecture: all
+Depends: ${python:Depends}
+XB-Python-Version: ${python:Versions}
+Provides: ${python:Provides}
+Description: A library that implements sorted string tables with fixed si
+ A library that implements sorted string tables with fixed size payload in Python.
+ .
+ Structure of SSTable file:
+  * 16 bytes of header (see below)
+  * Array of offsets. Each offset points to start of the string. For the first string offset = 0.
+  * One extra offset equals points to the byte right after last string+payload
+  * Strings. Each string is followed by payload, to calculate size of string 
+    calculate difference between current and next offsets and decrease by size of payload
+ .
+ Header format:
+  * 8 bytes: magic
+  * 2 bytes: version
+  * 2 bytes: size of extra structure
+  * 4 bytes: number of strings inside
+ .
+ .
+ All numbers inside are unsigned, all counters and offsets are integers
+ .
+ EXAMPLE:
+ .
