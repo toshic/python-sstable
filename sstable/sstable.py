@@ -53,6 +53,12 @@ class sstable:
 	index = array.array("I")
 
 	def __init__(self, buffer=None):
+		self.index = array.array("I")
+		self.header_count = 0
+		self.header_payload_size = 0
+		self.header_strings_start = 0
+		self.buffer = ""
+
 		if type(buffer) == types.StringType:
 			self.buffer = buffer
 
