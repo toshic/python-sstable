@@ -216,7 +216,7 @@ class sstable:
 		chunks = self.make_chunks_from_rec(key, payload)
 
 		# Create header
-		new_buf = struct.pack(self.header_fmt, self.header_magic, self.header_version, self.header_chunk_size, self.header_count+chunks[1])
+		new_buf = struct.pack(self.header_fmt, self.header_magic, self.header_version, self.header_chunk_size, self.header_count+chunks[1] - rem_count)
 
 		# Create main body
 		new_buf += self.buffer[self.header_strings_start:offset] \
